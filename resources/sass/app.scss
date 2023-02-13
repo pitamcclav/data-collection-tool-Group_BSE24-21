@@ -1,0 +1,50 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+.myform{
+    background-color: rgb(255, 255, 255,0.2);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 5%;
+}
+.card-header{
+    display: flex;
+    justify-content: space-between;
+}
+.h1{
+    margin-left: -80px;
+}
+.buttons{
+    display: flex;
+    justify-content: space-between;
+}
+span{
+    text-decoration: solid;
+    font-weight: 500;
+}
+td{
+    text-align: left;
+}
+th{
+    text-align:justify;
+}
+.head{
+    display: flex;
+    justify-content: space-between;
+
+}
+.logo{
+
+    margin-left: 100px;
+}
+.details{
+    display: block;
+}
