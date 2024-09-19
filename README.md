@@ -1,3 +1,17 @@
+## How to run the project
+1. Clone the project
+2. Run `composer install`
+3. Run `npm install`
+4. Run `npm run dev`
+5. Create a database and update the `.env` file with the database credentials
+6. If the `.env` file is not present, run `cp .env.example .env`
+7. Run `php artisan migrate`
+8. Run `php artisan serve`
+9. Open the browser and go to `http://127.0.0.1:8000`
+10. Register a new user
+11. Login with the registered user
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
