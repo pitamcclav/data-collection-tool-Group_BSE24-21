@@ -34,7 +34,7 @@ jobs:
         touch database/database.sqlite
 
     - name: Run Migrations
-      run: php artisan migrate 
+      run: php artisan migrate --force
 
     - name: Execute Tests (Unit and Feature tests) via PHPUnit/Pest
       env:
