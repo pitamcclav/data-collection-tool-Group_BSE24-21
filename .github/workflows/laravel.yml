@@ -1,26 +1,26 @@
-name: Laravel CI
+name: Project-testing CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
   pull_request:
-    branches:
-      - main
+    branches: [ "main" ]
 
 jobs:
   laravel-tests:
+
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+    - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869
+      with:
+        php-version: '8.0'
+    - uses: actions/checkout@v4
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+    
+    - name: Install Dependencies
+      run: composer install --prefer-dist --no-interaction
 
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.0'
-
-      - name: Install Dependencies
-        run: composer install --prefer-dist --no-interaction
-
-      - name: Run Tests
-        run: php artisan test
+    - name: Run Tests
+      run: php artisan test
