@@ -22,11 +22,12 @@ class Post extends Model
         'quarrels',
         'seperation',
         'emotional_distress',
-        'outcomeBehaviours'
+        'outcomeBehaviours',
 
     ];
+
     public function user()
-{
-    return $this->belongsTo(User::class);
-}
+    {
+        return $this->belongsTo(User::class);
+    }
 }

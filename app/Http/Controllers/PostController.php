@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,25 +18,21 @@ class PostController extends Controller
         //
         $title = 'Results';
         $posts = Post::where([
-            ['age_bracket', '!=', Null],
-            [function($query) use ($request){
-                if(($search = $request->search)){
+            ['age_bracket', '!=', null],
+            [function ($query) use ($request) {
+                if (($search = $request->search)) {
                     $query->orWhere('posts.education_level', 'like', '%'.$search.'%')
                         ->orWhere('posts.age_bracket', 'like', '%'.$search.'%')
                         ->orWhere('posts.employment_status', 'like', '%'.$search.'%')
 
-
                         ->get();
                 }
-            }]
+            }],
         ])
-
-        ->paginate(5);
+            ->paginate(5);
         // $posts = Post::all();
 
-
-        return view('others.posts.posts',compact('posts','title'));
-
+        return view('others.posts.posts', compact('posts', 'title'));
     }
 
     /**
@@ -51,61 +46,57 @@ class PostController extends Controller
 
         $flag = 'new';
         $route = '/posts/create';
-        return view('others.posts.form',['flag'=>$flag,'route'=>$route]);
+
+        return view('others.posts.form', ['flag' => $flag, 'route' => $route]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return redirect('/login');
-        }else{
+        } else {
+            //
+            $valid = $request->validate([
+                'age_bracket' => 'required',
+                'education_level' => 'required',
+                'employment_status' => 'required',
+                'meals_before' => 'required',
+                'meals_during' => 'required',
+                'shelterDisturbance' => 'required',
+                'disagreements' => 'required',
+                'disrespect' => 'required',
+                'fighting' => 'required',
+                'quarrels' => 'required',
+                'seperation' => 'required',
+                'emotional_distress' => 'required',
+                'outcomeBehaviours' => 'required',
 
+            ]);
 
+            $post = Post::create([
+                'age_bracket' => $request->age_bracket,
+                'education_level' => $request->education_level,
+                'employment_status' => $request->employment_status,
+                'meals_before' => $request->meals_before,
+                'meals_during' => $request->meals_during,
+                'shelterDisturbance' => $request->shelterDisturbance,
+                'disagreements' => $request->disagreements,
+                'disrespect' => $request->disrespect,
+                'fighting' => $request->fighting,
+                'quarrels' => $request->quarrels,
+                'seperation' => $request->seperation,
+                'emotional_distress' => $request->emotional_distress,
+                'outcomeBehaviours' => $request->outcomeBehaviours,
+                'user_id' => auth()->user()->id,
+            ]);
 
-        //
-        $valid = $request->validate([
-            'age_bracket' => 'required',
-            'education_level' => 'required',
-            'employment_status' => 'required',
-            'meals_before' => 'required',
-            'meals_during' => 'required',
-            'shelterDisturbance' => 'required',
-            'disagreements' => 'required',
-            'disrespect' => 'required',
-            'fighting' => 'required',
-            'quarrels' => 'required',
-            'seperation' => 'required',
-            'emotional_distress' => 'required',
-            'outcomeBehaviours' => 'required',
-
-
-        ]);
-
-
-        $post = Post::create([
-            'age_bracket' => $request->age_bracket,
-            'education_level' => $request->education_level,
-            'employment_status' => $request->employment_status,
-            'meals_before' => $request->meals_before,
-            'meals_during' => $request->meals_during,
-            'shelterDisturbance' => $request->shelterDisturbance,
-            'disagreements' => $request->disagreements,
-            'disrespect' => $request->disrespect,
-            'fighting' => $request->fighting,
-            'quarrels' => $request->quarrels,
-            'seperation' => $request->seperation,
-            'emotional_distress' => $request->emotional_distress,
-            'outcomeBehaviours' => $request->outcomeBehaviours,
-            'user_id'=>auth()->user()->id,
-        ]);
-        return redirect('/posts');
-    }
+            return redirect('/posts');
+        }
     }
 
     /**
@@ -118,7 +109,8 @@ class PostController extends Controller
     {
         //
         $post = Post::find($id);
-        return view('others.posts.single',['post'=>$post]);
+
+        return view('others.posts.single', ['post' => $post]);
     }
 
     /**
@@ -130,20 +122,17 @@ class PostController extends Controller
     public function edit($id)
     {
         //
-
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         //
-
     }
 
     /**
@@ -155,7 +144,6 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
-
     }
     // public function search(Request $request){
 

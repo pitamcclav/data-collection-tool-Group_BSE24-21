@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-            Schema::create('posts', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('age_bracket');
             $table->string('education_level');
