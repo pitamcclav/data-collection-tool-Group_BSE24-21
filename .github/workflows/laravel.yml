@@ -11,38 +11,58 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v4
+
+    # Setup PHP
     - uses: shivammathur/setup-php@v2
       with:
         php-version: '8.2'
-    - uses: actions/checkout@v4
 
-    - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+    # Setup Node.js for Vite
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
 
-    - name: Install Dependencies
+    # Install Composer Dependencies
+    - name: Install Composer Dependencies
       run: composer install
 
+    # Install NPM Dependencies
+    - name: Install NPM Dependencies
+      run: npm install
+
+    # Build Vite Assets
+    - name: Build Vite Assets
+      run: npm run build
+
+    # Generate Laravel Application Key
     - name: Generate Key
       run: php artisan key:generate
 
+    # Directory Permissions for Storage and Cache
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
 
+    # Create SQLite Database
     - name: Create Database
       run: |
         mkdir -p database
         touch database/database.sqlite
 
+    # Clear Config Cache
     - name: Clear Config Cache
       run: php artisan config:clear
 
+    # Run Migrations
     - name: Run Migrations
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: php artisan migrate --force
 
-    - name: Execute Tests (Unit and Feature tests) via PHPUnit/Pest
+    # Run Tests via PHPUnit/Pest
+    - name: Run Tests
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
