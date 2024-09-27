@@ -33,7 +33,13 @@ jobs:
         mkdir -p database
         touch database/database.sqlite
 
+    - name: Clear Config Cache
+      run: php artisan config:clear
+
     - name: Run Migrations
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: database/database.sqlite
       run: php artisan migrate --force
 
     - name: Execute Tests (Unit and Feature tests) via PHPUnit/Pest
