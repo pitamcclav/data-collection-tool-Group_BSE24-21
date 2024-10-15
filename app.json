@@ -44,7 +44,11 @@
                 "DB_CONNECTION": "sqlite",
                 "DB_DATABASE": ":memory:",
                 "APP_KEY": "base64:9L/HrSFrkJoTtuRsYhoTYodX1KCRGPHnCCkkrhKrjbE="
+            },
+            "php": {
+                "extensions": ["pdo_sqlite"]
             }
         }
+        }
     }
-}
+
