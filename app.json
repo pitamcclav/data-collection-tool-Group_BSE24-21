@@ -1,15 +1,28 @@
 {
+    "name": "Laravel",
+    "description": "Data collection tool",
     "scripts": {
-        "postinstall": "npm install && npm run build"
+        "test-setup": [
+            "composer install",
+            "npm install",
+            "npm run build",
+            "php artisan migrate "
+        ],
+        "test": "vendor/bin/phpunit"
+    },
+    "env": {
+        "APP_ENV": "testing",
+        "APP_DEBUG": "true",
+        "DB_CONNECTION": "sqlite",
+        "DB_DATABASE": ":memory:"
     },
     "environments": {
         "test": {
-            "scripts": {
-                "test-setup": [
-                    "composer install",
-                    "npm install",
-                    "npm run build"
-                ]
+            "env": {
+                "APP_ENV": "testing",
+                "APP_DEBUG": "true",
+                "DB_CONNECTION": "sqlite",
+                "DB_DATABASE": ":memory:"
             }
         }
     }
