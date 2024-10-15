@@ -1,0 +1,11 @@
+{
+    "environments": {
+        "test": {
+            "env": {
+                "APP_KEY": "base64:VYvQmFWyzrM0rOlzzD+TCizTUAtoDjT9FHhNDMVjECw=",
+                "APP_ENV": "testing",
+                "APP_DEBUG": "true"
+            }
+        }
+    }
+}
