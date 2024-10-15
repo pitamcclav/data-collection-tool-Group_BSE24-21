@@ -35,7 +35,6 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 
         Route::get('/posts/view/{id}', 'show');
         // Route::get('/posts/{search}', 'search')->name('set');
-
     });
 });
 
