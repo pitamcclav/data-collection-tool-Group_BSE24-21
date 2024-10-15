@@ -36,19 +36,21 @@
     "environments": {
         "test": {
             "scripts": {
-                "test-setup": "npm install && npm run build && composer install",
-                "test": "php artisan migrate --env=testing && vendor/bin/phpunit"
+                "test-setup": "npm install && npm run build && composer install && touch database/database.sqlite && php artisan config:clear",
+                "test": "php artisan migrate --env=testing --force && vendor/bin/phpunit"
             },
             "env": {
                 "APP_ENV": "testing",
                 "DB_CONNECTION": "sqlite",
-                "DB_DATABASE": ":memory:",
+                "DB_DATABASE": "database/database.sqlite",
                 "APP_KEY": "base64:9L/HrSFrkJoTtuRsYhoTYodX1KCRGPHnCCkkrhKrjbE="
             },
             "php": {
                 "extensions": ["pdo_sqlite"]
             }
         }
-        }
     }
+
+}
+
 
