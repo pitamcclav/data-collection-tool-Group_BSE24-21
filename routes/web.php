@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
@@ -36,7 +35,6 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 
         Route::get('/posts/view/{id}', 'show');
         // Route::get('/posts/{search}', 'search')->name('set');
-
     });
 });
 
