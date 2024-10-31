@@ -11,7 +11,6 @@
                         </h2>
                         <a href="{{route('admin.posts')}}" class="btn btn-secondary btn-md">Posts</a>
                         {{-- <a href="{{route('new_post') }}" class="btn btn-outline-primary">New Post</a> --}}
-
                 </div>
 
                 <div class="card-body">
@@ -20,7 +19,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+{{-- new part from nesssa testing pipeline --}}
                     @if ($errors->any())
                     <ul class="text-red-500">
                         @foreach ($errors->all() as $error)
