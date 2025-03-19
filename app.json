@@ -1,0 +1,56 @@
+{
+    "name": "Laravel App",
+    "description": "A Laravel application.",
+    "keywords": [
+        "laravel",
+        "php",
+        "backend"
+    ],
+    "scripts": {
+        "postdeploy": "php artisan migrate --force"
+    },
+    "env": {
+        "APP_KEY": {
+            "description": "Application encryption key",
+            "generator": "secret"
+        },
+        "APP_ENV": "production",
+        "DB_CONNECTION": "mysql"
+    },
+    "formation": {
+        "web": {
+            "quantity": 1,
+            "size": "standard-1x"
+        }
+    },
+    "image": "heroku/php",
+
+    "buildpacks": [
+        {
+            "url": "heroku/php"
+        },
+        {
+            "url": "heroku/nodejs"
+        }
+    ],
+    "environments": {
+        "test": {
+            "scripts": {
+                "test-setup": "npm install && npm run build && composer install && touch database/database.sqlite && php artisan config:clear",
+                "test": "php artisan migrate --env=testing --force && vendor/bin/phpunit"
+            },
+            "env": {
+                "APP_ENV": "testing",
+                "DB_CONNECTION": "sqlite",
+                "DB_DATABASE": "database/database.sqlite",
+                "APP_KEY": "base64:9L/HrSFrkJoTtuRsYhoTYodX1KCRGPHnCCkkrhKrjbE="
+            },
+            "php": {
+                "extensions": ["pdo_sqlite"]
+            }
+        }
+    }
+
+}
+
+
